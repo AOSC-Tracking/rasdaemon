@@ -578,17 +578,17 @@ ras_mc_ctl = configure_file(
 
 rasdaemon_env = prefix / get_option('sysconfdir') / 'sysconfig' / 'rasdaemon'
 install_data('misc/rasdaemon.env',
-    install_dir: get_option('sysconfdir') + '/sysconfig',
+    install_dir: get_option('sysconfdir') / 'sysconfig',
     rename: 'rasdaemon',
 )
 
 install_data('contrib/mc_event_trigger',
-    install_dir: get_option('sysconfdir') + '/ras/triggers',
+    install_dir: get_option('sysconfdir') / 'ras/triggers',
     install_mode: 'rwxr-xr-x',
 )
 
 install_data('contrib/mem_fail_trigger',
-    install_dir: get_option('sysconfdir') + '/ras/triggers',
+    install_dir: get_option('sysconfdir') / 'ras/triggers',
     install_mode: 'rwxr-xr-x',
 )
 
@@ -605,7 +605,7 @@ conf_data = {
     'sysconfdir' : get_option('sysconfdir'),
     'localstatedir' : get_option('localstatedir'),
     'sbindir' : get_option('sbindir'),
-    'SYSCONFDEFDIR' : get_option('sysconfdir') + '/sysconfig',
+    'SYSCONFDEFDIR' : get_option('sysconfdir') / 'sysconfig',
 
     'META_DATE' : run_command('date', '+%d %B %Y', check: true).stdout().strip(),
     'META_ALIAS' : meson.project_name(),
@@ -635,7 +635,7 @@ install_map = {
     'misc/rasdaemon.spec.in' : '',
 
     # Man pages
-    'man/rasdaemon.8.in' : get_option('mandir') + '/man8',
+    'man/rasdaemon.8.in' : get_option('mandir') / 'man8',
 
     # Systemd service files
     'misc/rasdaemon.service.in' : systemd_unitdir,
@@ -645,9 +645,9 @@ install_map = {
     'util/ras_config.py.in': pydir,
 
     # Other files
-    'misc/rasdaemon.syslog-ng.in' : get_option('sysconfdir') + '/syslog-ng/conf.d',
-    'misc/rasdaemon.rsyslog.in' : get_option('sysconfdir') + '/rsyslog.d',
-    'misc/rasdaemon.logrotate.in' : get_option('sysconfdir') + '/logrotate.d',
+    'misc/rasdaemon.syslog-ng.in' : get_option('sysconfdir') / 'syslog-ng/conf.d',
+    'misc/rasdaemon.rsyslog.in' : get_option('sysconfdir') / 'rsyslog.d',
+    'misc/rasdaemon.logrotate.in' : get_option('sysconfdir') / 'logrotate.d',
 }
 
 # File renaming install rules
@@ -719,7 +719,7 @@ endforeach
 
 if labels_list.length() > 0
     install_data(labels_list,
-        install_dir: get_option('sysconfdir') + '/ras/dimm_labels.d',
+        install_dir: get_option('sysconfdir') / 'ras/dimm_labels.d',
         install_mode: 'rw-r--r--',
     )
 endif
